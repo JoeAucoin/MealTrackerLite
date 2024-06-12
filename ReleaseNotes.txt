@@ -1,0 +1,18 @@
+﻿<h3>MealTrackerLite</h3>
+<p class="Contributor">
+	GIBS.com <br />
+	<a href="mailto:modules@gibs.com">modules@gibs.com</a><br />
+	<a href=https://www.gibs.com/>https://www.gibs.com/</a><br />
+	
+</p>
+<hr/>
+<div class="License">
+	<h3>About the MealTrackerLite</h3>
+	<p class="Owner">
+		<b>Companion Module for MealTracker</b><br /><br />
+	</p>
+	<p>Lite version for daily entry of data.</p>
+	
+	
+	
+</div>
