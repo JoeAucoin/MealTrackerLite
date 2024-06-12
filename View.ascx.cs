@@ -89,7 +89,7 @@ namespace GIBS.Modules.MealTrackerLite
                     LoadSettings();
                     FillDeliveryTimeDropdowns();
 
-                    GridView1.DataSource = MealController.GetAllMeals(0, this.PortalId);
+                    GridView1.DataSource = MealController.GetAllMealsLite(0, this.PortalId, _startDate.ToString(), _endDate.ToString());
                     GridView1.DataBind();
 
                     GetDropDownLists();
@@ -564,7 +564,7 @@ namespace GIBS.Modules.MealTrackerLite
             try
             {
 
-                GridView1.DataSource = MealController.GetAllMeals(Int32.Parse(ddlLocationID.SelectedValue.ToString()), this.PortalId);
+                GridView1.DataSource = MealController.GetAllMealsLite(Int32.Parse(ddlLocationID.SelectedValue.ToString()), this.PortalId, _startDate.ToString(), _endDate.ToString());
                 GridView1.DataBind();
 
             }

@@ -21,7 +21,7 @@
 <div class="container">
 
     	<div class="row form">
-                <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4 col-md-offset-1">
+                <div class="form-group col-xs-11 col-sm-5 col-md-4 col-lg-4 col-md-offset-1">
             
             <dnn:label id="lblSchoolLocation" runat="server" controlname="ddlLocationID" suffix=":" CssClass="control-label" />
 	
@@ -31,13 +31,13 @@
             
             </div>	
             
-        <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4"><dnn:label id="lblSeating" runat="server" controlname="ddlSeating" suffix=":" CssClass="control-label" />
+        <div class="form-group col-xs-11 col-sm-5 col-md-4 col-lg-4"><dnn:label id="lblSeating" runat="server" controlname="ddlSeating" suffix=":" CssClass="control-label" />
 			
     <asp:DropDownList ID="ddlSeating" runat="server" OnSelectedIndexChanged="ddlSeating_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control input-lg">
     </asp:DropDownList>	
 	    <asp:RequiredFieldValidator runat="server" id="reqSeating" resourcekey="reqSeating" controltovalidate="ddlSeating" Display="Dynamic" errormessage="Required!" CssClass="NormalRed" />
         </div>
-        <div class="form-group col-xs-6 col-sm-1 col-md-1 col-lg-1 checkbox-lg">
+        <div class="form-group col-xs-6 col-sm-2 col-md-1 col-lg-1 checkbox-lg">
             <dnn:label id="lblDeseCbx" runat="server" controlname="CheckBoxDESE" suffix=":" CssClass="control-label" />
             <asp:CheckBox ID="CheckBoxDESE" runat="server" Enabled="false" CssClass="form-control form-check-input"  />
             </div>
@@ -80,7 +80,7 @@
 	<asp:TextBox ID="txtSecondsCount" runat="server" type="number" pattern="\d*" CssClass="form-control input-lg" />
 	<asp:RequiredFieldValidator runat="server" id="reqSecondsCount" controltovalidate="txtSecondsCount" errormessage="Required!" Display="Dynamic" resourcekey="reqSecondsCount" CssClass="NormalRed" />
             </div>
-         <div class="form-group col-xs-5 col-sm-2 col-md-2 col-lg-1"><dnn:label id="lblAdults" runat="server" controlname="txtAdults" suffix=":" CssClass="control-label" />
+         <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-1"><dnn:label id="lblAdults" runat="server" controlname="txtAdults" suffix=":" CssClass="control-label" />
 	<asp:TextBox ID="txtAdults" runat="server" type="number" pattern="\d*" CssClass="form-control input-lg" />
 	<asp:RequiredFieldValidator runat="server" id="reqAdults" controltovalidate="txtAdults" errormessage="Required!" Display="Dynamic" resourcekey="reqAdults" CssClass="NormalRed" />
             </div>
@@ -89,7 +89,7 @@
 
 
     	<div class="row form">
-	       <div class="form-group col-xs-7 col-sm-7 col-md-7 col-lg-7 col-md-offset-2"><dnn:label id="lblMealNotes" runat="server" controlname="txtMealNotes" suffix=":" CssClass="control-label" />
+	       <div class="form-group col-xs-11 col-sm-10 col-md-7 col-lg-7 col-md-offset-2"><dnn:label id="lblMealNotes" runat="server" controlname="txtMealNotes" suffix=":" CssClass="control-label" />
 			<asp:TextBox ID="txtMealNotes" runat="server" TextMode="MultiLine" CssClass="form-control input-lg"></asp:TextBox>      
             </div> 
         
