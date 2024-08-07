@@ -101,6 +101,7 @@
             <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4" style="text-align:center;">
         <asp:LinkButton ID="lbSave" runat="server" resourcekey="lbSave" OnClick="LbSaveClick" CssClass="dnnPrimaryAction" />
         <asp:LinkButton ID="lbCancel" runat="server" resourcekey="lbCancel" OnClick="LbCancelClick" CausesValidation="false" CssClass="dnnSecondaryAction" Visible="false"/>
+                <asp:label runat="server" CssClass="msgSuccess" ID="LabelResults"></asp:label>
         </div>
           <div class="clearfix"></div>
 

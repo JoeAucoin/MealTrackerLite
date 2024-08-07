@@ -322,6 +322,9 @@ namespace GIBS.Modules.MealTrackerLite
 
                     mi.Save();
 
+                    LabelResults.Visible = true;
+                    LabelResults.Text = "Success";
+
                 }
 
 
@@ -339,6 +342,7 @@ namespace GIBS.Modules.MealTrackerLite
 
             try
             {
+                txtMealDate.Text = string.Empty;
                 ddlSeating.SelectedValue = null;
                 txtFirstsCount.Text = "";
                 txtSecondsCount.Text = "";
