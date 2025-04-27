@@ -195,6 +195,15 @@ namespace GIBS.Modules.MealTrackerLite
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqDelivered;
 
         /// <summary>
+        /// rvDelivered control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvDelivered;
+
+        /// <summary>
         /// lblDamagedIncomplete control.
         /// </summary>
         /// <remarks>
@@ -220,6 +229,24 @@ namespace GIBS.Modules.MealTrackerLite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqDamagedIncomplete;
+
+        /// <summary>
+        /// rvDamaged control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvDamaged;
+
+        /// <summary>
+        /// cvDamagedVsDelivered control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvDamagedVsDelivered;
 
         /// <summary>
         /// lblFirstsCount control.
@@ -249,6 +276,24 @@ namespace GIBS.Modules.MealTrackerLite
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqFirstsCount;
 
         /// <summary>
+        /// cvFirstsVsTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvFirstsVsTotal;
+
+        /// <summary>
+        /// rvFirsts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvFirsts;
+
+        /// <summary>
         /// lblSecondsCount control.
         /// </summary>
         /// <remarks>
@@ -276,6 +321,24 @@ namespace GIBS.Modules.MealTrackerLite
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqSecondsCount;
 
         /// <summary>
+        /// cvSecondsVsRemaining control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvSecondsVsRemaining;
+
+        /// <summary>
+        /// rvSeconds control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvSeconds;
+
+        /// <summary>
         /// lblAdults control.
         /// </summary>
         /// <remarks>
@@ -301,6 +364,51 @@ namespace GIBS.Modules.MealTrackerLite
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqAdults;
+
+        /// <summary>
+        /// cvAdultsVsRemaining control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvAdultsVsRemaining;
+
+        /// <summary>
+        /// rvAdults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvAdults;
+
+        /// <summary>
+        /// lblShort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblShort;
+
+        /// <summary>
+        /// txtShort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtShort;
+
+        /// <summary>
+        /// rvShort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator rvShort;
 
         /// <summary>
         /// lblMealNotes control.

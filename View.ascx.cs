@@ -244,8 +244,7 @@ namespace GIBS.Modules.MealTrackerLite
 
             MealController.DeleteMeal(itemID);
             FillGrid();
-            //  Response.Redirect(Globals.NavigateURL(TabId));
-            //FillGrid();
+            
 
         }
         protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -264,23 +263,40 @@ namespace GIBS.Modules.MealTrackerLite
         {
             hfSelecteValue.Value = ddlLocationID.SelectedValue.ToString();
             int _hidMealID = Convert.ToInt32(HiddenMealID.Value.ToString());
-            lblDebug.Text = "Step 1 <br />";
+        //    lblDebug.Text = "Step 1 <br />";
             MealInfo mi;
 
             if (_hidMealID > 0)
 
             {
-                // DO UPDATE HERE 
-                lblDebug.Text += "MealID = 0 <br />";
-                lblDebug.Visible=true; 
-              //  mi = new MealInfo();
-                //    mi = ArticleController.GetArticle(ArticleId);
-                //mi.MealDate = Convert.ToDateTime(txtMealDate.Text.ToString());
-                //mi.Seating = txtPlatesServed.Text.ToString();
-                //mi.ChildCount = txtChildCount.Text.ToString();
-                //mi.LastModifiedOnDate = DateTime.Now;
-                //mi.LastModifiedByUserId = UserInfo.UserID;
-                //mi.ModuleId = ModuleId;
+
+
+                //lblDebug.Text += "MealID = " + _hidMealID.ToString();
+                //lblDebug.Visible=true;
+
+                string _notes = txtMealNotes.Text.ToString();
+                PortalSecurity cleanup = new PortalSecurity();
+                _notes = cleanup.InputFilter(_notes.ToString(), PortalSecurity.FilterFlag.NoScripting);
+                _notes = cleanup.InputFilter(_notes.ToString(), PortalSecurity.FilterFlag.NoMarkup);
+
+
+                MealInfo mi_update;
+                mi_update = new MealInfo
+
+                {
+                    MealID = Int32.Parse(HiddenMealID.Value.ToString()),
+                    DeliveredCount = Convert.ToInt32(txtDelivered.Text.ToString()),
+                    FirstsCount = Convert.ToInt32(txtFirstsCount.Text.ToString()),
+                    SecondsCount = Convert.ToInt32(txtSecondsCount.Text.ToString()),
+                    Adults = Convert.ToInt32(txtAdults.Text.ToString()),
+                    DamagedIncomplete = Convert.ToInt16(txtDamagedIncomplete.Text.ToString()),
+                    DeliveryTime = txtMealDate.Text.ToString() + " " + ddlDeliveryTime.SelectedValue.ToString(),
+                    Short = Convert.ToInt32(txtShort.Text.ToString()),
+                    Notes = _notes.ToString()
+
+                };
+
+                mi_update.Update();
 
             }
 
@@ -317,7 +333,7 @@ namespace GIBS.Modules.MealTrackerLite
                         DESE = CheckBoxDESE.Checked
                         ,DeliveryTime = txtMealDate.Text.ToString() + " " + ddlDeliveryTime.SelectedValue.ToString()
                         ,DamagedIncomplete = Int32.Parse(txtDamagedIncomplete.Text.ToString())
-
+                        ,Short = Convert.ToInt32(txtShort.Text.ToString())
                     };
 
                     mi.Save();
@@ -354,6 +370,7 @@ namespace GIBS.Modules.MealTrackerLite
                 ddlDeliveryTime.SelectedIndex = -1;
                
                 txtDamagedIncomplete.Text = "0";
+                txtShort.Text = "0";
                
             }
             catch (Exception ex)
@@ -506,6 +523,8 @@ namespace GIBS.Modules.MealTrackerLite
                 txtFirstsCount.Text = item.FirstsCount.ToString();
                 txtSecondsCount.Text = item.SecondsCount.ToString();
                 txtAdults.Text = item.Adults.ToString();
+                txtShort.Text = item.Short.ToString();
+                
             }
 
         }
@@ -558,7 +577,7 @@ namespace GIBS.Modules.MealTrackerLite
 
                     }
                 }
-                // Do whatever operation you want.  
+                
             }
         }
 
@@ -579,19 +598,6 @@ namespace GIBS.Modules.MealTrackerLite
 
         }
 
-        //public ModuleActionCollection ModuleActions
-        //{
-        //    get
-        //    {
-        //        var actions = new ModuleActionCollection
-        //            {
-        //                {
-        //                    GetNextActionID(), Localization.GetString("EditModule", LocalResourceFile), "", "", "",
-        //                    EditUrl(), false, SecurityAccessLevel.Edit, true, false
-        //                }
-        //            };
-        //        return actions;
-        //    }
-        //}
+       
     }
 }

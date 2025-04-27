@@ -159,6 +159,9 @@
   <data name="lblSecondsCount.Text" xml:space="preserve">
     <value>Seconds</value>
   </data>
+  <data name="lblShort.Text" xml:space="preserve">
+    <value>Short</value>
+  </data>
   <data name="lbSave.Text" xml:space="preserve">
     <value>Save</value>
   </data>
