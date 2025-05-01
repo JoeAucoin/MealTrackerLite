@@ -126,6 +126,9 @@
   <data name="lblCalStartDate.Text" xml:space="preserve">
     <value>Calendar Start Date</value>
   </data>
+  <data name="lblDeleteRole.Text" xml:space="preserve">
+    <value>Delete Role</value>
+  </data>
   <data name="lblDeliveryEndTime.Text" xml:space="preserve">
     <value>Delivery End Time</value>
   </data>

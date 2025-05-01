@@ -31,6 +31,21 @@ namespace GIBS.Modules.MealTrackerLite
             }
         }
 
+        public string DeleteRole
+        {
+            get
+            {
+                if (Settings.Contains("deleteRole"))
+                    return Settings["deleteRole"].ToString();
+                return "";
+            }
+            set
+            {
+                var mc = new ModuleController();
+                mc.UpdateTabModuleSetting(TabModuleId, "deleteRole", value.ToString());
+            }
+        }
+
         public string LocationsList
         {
             get

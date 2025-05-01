@@ -11,6 +11,13 @@
            
      </div>	
 
+	<div class="dnnFormItem">
+    
+        <dnn:label id="lblDeleteRole" runat="server" controlname="ddlRoles" suffix=":"></dnn:label>
+        <asp:DropDownList ID="ddlRoles" runat="server" datavaluefield="RoleName" datatextfield="RoleName" CssClass="form-control input-lg">
+        </asp:DropDownList>
+	</div>
+
 
 	<div class="dnnFormItem" style="display:none;">
         <dnn:Label runat="server" ID="lblLocationsList" ControlName="Locations" ResourceKey="lblLocationsList" Suffix=":" />

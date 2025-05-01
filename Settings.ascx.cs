@@ -53,6 +53,8 @@ namespace GIBS.Modules.MealTrackerLite
             {
                 if (Page.IsPostBack == false)
                 {
+                    GetRoles();
+
                     var ctlLists = new ListController();
                     var myLists = ctlLists.GetListInfoCollection(string.Empty, string.Empty, PortalSettings.ActiveTab.PortalID);
                     //ddlLocationList.Items.Clear();
@@ -71,6 +73,9 @@ namespace GIBS.Modules.MealTrackerLite
                     ddlSeatingList.Items.Insert(0, new ListItem("-Select-", ""));
 
                 }
+
+                if (Settings.Contains("deleteRole"))
+                    ddlRoles.SelectedValue = Settings["deleteRole"].ToString();
 
                 if (Settings.Contains("locationsList"))
                     ddlLocationList.SelectedValue = Settings["locationsList"].ToString();
@@ -104,6 +109,56 @@ namespace GIBS.Modules.MealTrackerLite
             }
         }
 
+        public void GetRoles()
+        {
+            DotNetNuke.Security.Roles.RoleController rc = new DotNetNuke.Security.Roles.RoleController();
+
+            var myRoles = rc.GetRoles(this.PortalId);
+            //  myRoles
+            ddlRoles.DataSource = myRoles;
+            ddlRoles.DataTextField = "RoleName";
+            ddlRoles.DataValueField = "RoleName";
+            ddlRoles.DataBind();
+
+            // ADD FIRST (NULL) ITEM
+            ListItem item = new ListItem();
+            item.Text = "-- Select Role to Assign --";
+            item.Value = "";
+            ddlRoles.Items.Insert(0, item);
+            // REMOVE DEFAULT ROLES
+            ddlRoles.Items.Remove("Administrators");
+            ddlRoles.Items.Remove("Registered Users");
+            ddlRoles.Items.Remove("Subscribers");
+
+            //// REPORTS ROLE
+            //ddlReportsRoles.DataSource = myRoles;
+            //ddlReportsRoles.DataBind();
+
+            //// ADD FIRST (NULL) ITEM
+            //ListItem item1 = new ListItem();
+            //item1.Text = "-- Select Role to View Reports --";
+            //item1.Value = "";
+            //ddlReportsRoles.Items.Insert(0, item1);
+            //// REMOVE DEFAULT ROLES
+            //ddlReportsRoles.Items.Remove("Administrators");
+            //ddlReportsRoles.Items.Remove("Registered Users");
+            //ddlReportsRoles.Items.Remove("Subscribers");
+
+            //// MERGE ROLE
+
+            //ddlMergeRoles.DataSource = myRoles;
+            //ddlMergeRoles.DataBind();
+
+            //// ADD FIRST (NULL) ITEM
+            //item1.Value = "Select Role to Allow Merge";
+            //ddlMergeRoles.Items.Insert(0, item1);
+            //// REMOVE DEFAULT ROLES
+            //ddlMergeRoles.Items.Remove("Administrators");
+            //ddlMergeRoles.Items.Remove("Registered Users");
+            //ddlMergeRoles.Items.Remove("Subscribers");
+
+        }
+
         /// -----------------------------------------------------------------------------
         /// <summary>
         /// UpdateSettings saves the modified settings to the Database
@@ -117,6 +172,9 @@ namespace GIBS.Modules.MealTrackerLite
 
                 //the following are two sample Module Settings, using the text boxes that are commented out in the ASCX file.
                 //module settings
+
+                modules.UpdateModuleSetting(ModuleId, "deleteRole", ddlRoles.SelectedValue.ToString()); 
+
                 modules.UpdateModuleSetting(ModuleId, "jQueryUI", txtjQueryUI.Text);
                 modules.UpdateModuleSetting(ModuleId, "locationsList", ddlLocationList.SelectedValue.ToString());
                 modules.UpdateModuleSetting(ModuleId, "seatingList", ddlSeatingList.SelectedValue.ToString());

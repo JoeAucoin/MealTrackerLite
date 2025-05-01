@@ -55,6 +55,8 @@ namespace GIBS.Modules.MealTrackerLite
         static string _startDate = "06/24/2024";
         static string _endDate = "09/01/2024";
 
+        string _deleteRole = "";
+
 
         protected override void OnInit(EventArgs e)
         {
@@ -120,8 +122,30 @@ namespace GIBS.Modules.MealTrackerLite
         {
             try
             {
+              //  GridView1.Rows[1].Visible = false;
+             //   GridView1.Columns[1].Visible = false;
 
-                if (Settings.Contains("locationsList"))
+                if (Settings.Contains("deleteRole"))
+                {
+                    _deleteRole = (Settings["deleteRole"].ToString());
+
+                    if (UserId > 0)
+                    {
+                        DotNetNuke.Entities.Users.UserInfo USERINFO = DotNetNuke.Entities.Users.UserController.GetUserById(PortalId, this.UserId);
+                        if (!USERINFO.IsInRole(_deleteRole.ToString()))
+                        {
+                            GridView1.Columns[1].Visible = false;
+                            
+                        }
+                        else
+                        {
+                            GridView1.Columns[1].Visible = true;
+                        }
+                    }
+
+                }
+
+                    if (Settings.Contains("locationsList"))
                 {
                     _LocationsList = Settings["locationsList"].ToString();
 
