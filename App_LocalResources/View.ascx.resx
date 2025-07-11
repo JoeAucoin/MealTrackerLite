@@ -132,6 +132,12 @@
   <data name="lblDelivered.Text" xml:space="preserve">
     <value>Delivered</value>
   </data>
+  <data name="lblDeliveryPriorDay.Help1" xml:space="preserve">
+    <value>Prior Day  Delivery</value>
+  </data>
+  <data name="lblDeliveryPriorDay.Text" xml:space="preserve">
+    <value>PriorDay</value>
+  </data>
   <data name="lblDeliveryTime.Text" xml:space="preserve">
     <value>Delivery&amp;nbsp;Time</value>
   </data>

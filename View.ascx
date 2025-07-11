@@ -68,10 +68,10 @@
     });        
 
 </script>
-<div><asp:Label ID="lblDebug" runat="server" Visible="false" CssClass="alert alert-warning" />
+<div><asp:Label ID="lblDebug" runat="server" Visible="false" />
     </div>
  <asp:HiddenField ID="HiddenMealID" runat="server" Value="0" />
-<asp:HiddenField ID="hfSelecteValue" Value="" runat="server" />
+<asp:HiddenField ID="hfSelecteValue" Value="0" runat="server" />
 
 <div class="container">
 
@@ -117,18 +117,24 @@
             
             </div>
 
+            <div class="form-group col-xs-4 col-sm-3 col-md-3 col-lg-1">
+                <dnn:label id="lblDeliveryPriorDay" runat="server" controlname="cbxDeliveryPriorDay" suffix=":" CssClass="control-label" />
+                <asp:CheckBox ID="cbxDeliveryPriorDay" runat="server" CssClass="form-control checkbox-lg" />
+                </div>
+
+
         <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-1">
             
             <dnn:label id="lblDelivered" runat="server" controlname="txtDelivered" suffix=":" CssClass="control-label" />
 	<asp:TextBox ID="txtDelivered" runat="server" ClientIDMode="Static" type="number" pattern="\d*" CssClass="form-control input-lg" />
             <asp:RequiredFieldValidator runat="server" id="reqDelivered" controltovalidate="txtDelivered" Display="Dynamic" errormessage="Required!" resourcekey="reqDelivered" CssClass="NormalRed" />
              
-            <asp:RangeValidator ID="rvDelivered" runat="server" ControlToValidate="txtDelivered" MinimumValue="1" MaximumValue="100" Type="Integer" ErrorMessage="Please enter a number between 1 and 100." Display="Dynamic" CssClass="NormalRed" resourcekey="rvDeliveredPositive" />	
+            <asp:RangeValidator ID="rvDelivered" runat="server" ControlToValidate="txtDelivered" MinimumValue="0" MaximumValue="200" Type="Integer" ErrorMessage="Please enter a number between 1 and 200." Display="Dynamic" CssClass="NormalRed" resourcekey="rvDeliveredPositive" />	
             </div>
 			        <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-1"><dnn:label id="lblDamagedIncomplete" runat="server" controlname="txtDamagedIncomplete" suffix=":" />
 	<asp:TextBox ID="txtDamagedIncomplete" runat="server" Text="0" type="number" pattern="\d*" CssClass="form-control input-lg" />
     <asp:RequiredFieldValidator runat="server" id="reqDamagedIncomplete" controltovalidate="txtDamagedIncomplete" Display="Dynamic" errormessage="Required!" resourcekey="reqDamagedIncomplete" CssClass="NormalRed" />
-<asp:RangeValidator ID="rvDamaged" runat="server" ControlToValidate="txtDamagedIncomplete" MinimumValue="0" MaximumValue="100" Type="Integer" ErrorMessage="Please enter a number zero or greater." Display="Dynamic" CssClass="NormalRed" resourcekey="rvDamagedPositive" />	
+<asp:RangeValidator ID="rvDamaged" runat="server" ControlToValidate="txtDamagedIncomplete" MinimumValue="0" MaximumValue="200" Type="Integer" ErrorMessage="Please enter a number zero or greater." Display="Dynamic" CssClass="NormalRed" resourcekey="rvDamagedPositive" />	
            <asp:CustomValidator ID="cvDamagedVsDelivered" runat="server" ControlToValidate="txtDamagedIncomplete" ClientValidationFunction="validateDamaged" ErrorMessage="Damaged cannot be greater than Delivered." Display="Dynamic" CssClass="NormalRed" resourcekey="cvDamagedVsDelivered" />
 
 			        </div>
@@ -136,7 +142,7 @@
         <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-1"><dnn:label id="lblFirstsCount" runat="server" controlname="txtFirstsCount" suffix=":" />
 	<asp:TextBox ID="txtFirstsCount" runat="server" type="number" pattern="\d*" CssClass="form-control input-lg" /><asp:RequiredFieldValidator runat="server" id="reqFirstsCount" controltovalidate="txtFirstsCount" Display="Dynamic" errormessage="Required!" resourcekey="reqFirstsCount" CssClass="NormalRed" />
             <asp:CustomValidator ID="cvFirstsVsTotal" runat="server" ControlToValidate="txtFirstsCount" ClientValidationFunction="validateFirsts" ErrorMessage="Firsts Count cannot be greater than Delivered - Damaged." Display="Dynamic" CssClass="NormalRed" resourcekey="cvFirstsVsTotal" />
-<asp:RangeValidator ID="rvFirsts" runat="server" ControlToValidate="txtFirstsCount" MinimumValue="1" MaximumValue="100" Type="Integer" ErrorMessage="Please enter a number greater than zero." Display="Dynamic" CssClass="NormalRed" resourcekey="rvFirstsPositive" />	            
+<asp:RangeValidator ID="rvFirsts" runat="server" ControlToValidate="txtFirstsCount" MinimumValue="0" MaximumValue="200" Type="Integer" ErrorMessage="Please enter a number greater than zero and less then 200." Display="Dynamic" CssClass="NormalRed" resourcekey="rvFirstsPositive" />	            
         </div>
 		
         <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-1"><dnn:label id="lblSecondsCount" runat="server" controlname="txtSecondsCount" suffix=":" CssClass="control-label" />
@@ -214,8 +220,8 @@
 <ItemStyle Width="90px"></ItemStyle>
         </asp:BoundField>
 
-        <asp:BoundField HeaderText="Delivery Time" DataField="DeliveryTime" NullDisplayText="" ItemStyle-Width="80px">
-<ItemStyle Width="80px"></ItemStyle>
+        <asp:BoundField HeaderText="Delivery Time" DataField="DeliveryTime" NullDisplayText="" HtmlEncode="false" ItemStyle-Width="80px">
+<ItemStyle Width="105px"></ItemStyle>
         </asp:BoundField>
 
       <asp:BoundField HeaderText="Location" DataField="Location" ItemStyle-Width="170px" />
@@ -260,3 +266,5 @@
     
 </asp:GridView>
     </div>
+
+<div><small>(1) - Prior Day Delivery</small></div>

@@ -168,6 +168,24 @@ namespace GIBS.Modules.MealTrackerLite
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqDeliveryTime;
 
         /// <summary>
+        /// lblDeliveryPriorDay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblDeliveryPriorDay;
+
+        /// <summary>
+        /// cbxDeliveryPriorDay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbxDeliveryPriorDay;
+
+        /// <summary>
         /// lblDelivered control.
         /// </summary>
         /// <remarks>

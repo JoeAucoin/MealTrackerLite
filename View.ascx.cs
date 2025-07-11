@@ -42,12 +42,12 @@ namespace GIBS.Modules.MealTrackerLite
     /// -----------------------------------------------------------------------------
     public partial class View : MealTrackerLiteModuleBase
     {
-        static string _LocationsList = "MTLocations";
-        static string _SeatingList = "MTMealSeating";
-        static bool _DESE_Breakfast = false;
-        static bool _DESE_Lunch = false;
-        static bool _DESE_Snack = false;
-        static bool _DESE_Snack_PM = false;
+        
+        public string _SeatingList = "MTMealSeating";
+        public bool _DESE_Breakfast;
+        public bool _DESE_Lunch;
+        public bool _DESE_Snack;
+        public bool _DESE_Snack_PM;
         public string _DeliveryStartTime = "10:00 AM";
         public string _DeliveryEndTime = "02:00 PM";
         public string _DeliveryInterval = "30";
@@ -145,11 +145,7 @@ namespace GIBS.Modules.MealTrackerLite
 
                 }
 
-                    if (Settings.Contains("locationsList"))
-                {
-                    _LocationsList = Settings["locationsList"].ToString();
 
-                }
 
                 if (Settings.Contains("seatingList"))
                 {
@@ -229,9 +225,7 @@ namespace GIBS.Modules.MealTrackerLite
 
             try
             {
-                // Get State Dropdown from DNN Lists
-
-                // var regions = new ListController().GetListEntryInfoItems(_LocationsList, "", this.PortalId);
+                           
                 List<MealInfo> items;
                 MealController controller = new MealController();
 
@@ -251,6 +245,8 @@ namespace GIBS.Modules.MealTrackerLite
                 ddlSeating.DataSource = seating;
                 ddlSeating.DataBind();
                 ddlSeating.Items.Insert(0, new ListItem("-- Please Select --", ""));
+
+                ddlSeating.Enabled = false;
             }
 
             catch (Exception ex)
@@ -291,7 +287,7 @@ namespace GIBS.Modules.MealTrackerLite
             MealInfo mi;
 
             if (_hidMealID > 0)
-
+            // UPDATE RECORD
             {
 
 
@@ -302,6 +298,29 @@ namespace GIBS.Modules.MealTrackerLite
                 PortalSecurity cleanup = new PortalSecurity();
                 _notes = cleanup.InputFilter(_notes.ToString(), PortalSecurity.FilterFlag.NoScripting);
                 _notes = cleanup.InputFilter(_notes.ToString(), PortalSecurity.FilterFlag.NoMarkup);
+
+                string mealDate = txtMealDate.Text.ToString();
+                string deliveredDate = "";
+
+                if (cbxDeliveryPriorDay.Checked)
+                {
+                    // First, parse the string into a DateTime object
+                    if (DateTime.TryParse(mealDate, out DateTime originalDate))
+                    {
+                        // Now, subtract one day using the AddDays() method
+                        DateTime previousDay = originalDate.AddDays(-1);
+
+                        // If you need the result back as a string in a specific format:
+                        deliveredDate = previousDay.ToString("MM/dd/yyyy"); // Or any other desired format
+
+                    }
+
+                }
+                else
+                {
+                    deliveredDate = mealDate.ToString();
+                }
+
 
 
                 MealInfo mi_update;
@@ -314,20 +333,20 @@ namespace GIBS.Modules.MealTrackerLite
                     SecondsCount = Convert.ToInt32(txtSecondsCount.Text.ToString()),
                     Adults = Convert.ToInt32(txtAdults.Text.ToString()),
                     DamagedIncomplete = Convert.ToInt16(txtDamagedIncomplete.Text.ToString()),
-                    DeliveryTime = txtMealDate.Text.ToString() + " " + ddlDeliveryTime.SelectedValue.ToString(),
+                    DeliveryTime = deliveredDate.ToString() + " " + ddlDeliveryTime.SelectedValue.ToString(),
                     Short = Convert.ToInt32(txtShort.Text.ToString()),
                     Notes = _notes.ToString()
 
                 };
 
                 mi_update.Update();
-
+                txtDelivered.Text = "";
             }
 
             else
-
+            // INSERT NEW RECORD
             {
-                lblDebug.Text += "MealID = not exists <br />";
+              //  lblDebug.Text += "MealID = not exists <br />";
                 
 
 
@@ -338,6 +357,31 @@ namespace GIBS.Modules.MealTrackerLite
                     PortalSecurity cleanup = new PortalSecurity();
                     _notes = cleanup.InputFilter(_notes.ToString(), PortalSecurity.FilterFlag.NoScripting);
                     _notes = cleanup.InputFilter(_notes.ToString(), PortalSecurity.FilterFlag.NoMarkup);
+
+
+                    string mealDate = txtMealDate.Text.ToString();
+                    string deliveredDate = "";
+
+                    if (cbxDeliveryPriorDay.Checked) 
+                    {
+                        // First, parse the string into a DateTime object
+                        if (DateTime.TryParse(mealDate, out DateTime originalDate))
+                        {
+                            // Now, subtract one day using the AddDays() method
+                            DateTime previousDay = originalDate.AddDays(-1);
+
+                            // If you need the result back as a string in a specific format:
+                            deliveredDate = previousDay.ToString("MM/dd/yyyy"); // Or any other desired format
+
+                        }
+                      
+                    }
+                    else 
+                    {
+                        deliveredDate = mealDate.ToString();
+                    }
+
+                    
 
                     mi = new MealInfo
 
@@ -355,7 +399,7 @@ namespace GIBS.Modules.MealTrackerLite
                         MTPortalID = this.PortalId,
                         Adults = Convert.ToInt32(txtAdults.Text.ToString()),
                         DESE = CheckBoxDESE.Checked
-                        ,DeliveryTime = txtMealDate.Text.ToString() + " " + ddlDeliveryTime.SelectedValue.ToString()
+                        ,DeliveryTime = deliveredDate.ToString() + " " + ddlDeliveryTime.SelectedValue.ToString()
                         ,DamagedIncomplete = Int32.Parse(txtDamagedIncomplete.Text.ToString())
                         ,Short = Convert.ToInt32(txtShort.Text.ToString())
                     };
@@ -382,12 +426,16 @@ namespace GIBS.Modules.MealTrackerLite
 
             try
             {
+                HiddenMealID.Value = "0";
+                ddlLocationID.Enabled = true;
+                ddlSeating.Enabled = true;
+                txtMealDate.Enabled = true;
                 txtMealDate.Text = string.Empty;
                 ddlSeating.SelectedValue = null;
                 txtFirstsCount.Text = "";
                 txtSecondsCount.Text = "";
                 txtAdults.Text = "";
-              
+                cbxDeliveryPriorDay.Checked = false;
                 CheckBoxDESE.Checked = false;
                 txtMealNotes.Text = string.Empty;
                
@@ -411,7 +459,7 @@ namespace GIBS.Modules.MealTrackerLite
             {
 
                 txtDelivered.Text = "";
-               
+                CheckBoxDESE.Checked = false;
                 _DESE_Breakfast = false;
                 _DESE_Lunch = false;
                 _DESE_Snack = false;
@@ -427,11 +475,16 @@ namespace GIBS.Modules.MealTrackerLite
 
         protected void ddlLocationID_SelectedIndexChanged(object sender, EventArgs e)
         {
+            LabelResults.Text = "";
+            
+            ddlSeating.Enabled = true;
+
             ClearDelivered();
+            ddlSeating.ClearSelection();
             hfSelecteValue.Value = ddlLocationID.SelectedValue.ToString();
-            //ddlLocationID.Items.FindByValue(hfSelecteValue.Value.ToString()).Selected = true;
+            
             FillGrid();
-            LoadDeseSettings();
+         //   LoadDeseSettings();
 
 
         }
@@ -440,7 +493,9 @@ namespace GIBS.Modules.MealTrackerLite
         {
             try
             {
-                string whatsSelected = ddlSeating.SelectedValue.ToString();
+                string whatsSelected = ddlSeating.SelectedValue.ToString().Trim();
+                LoadDeseSettings();
+              
                 switch (whatsSelected.ToString())
                 {
                     case "Breakfast Seating":
@@ -488,8 +543,8 @@ namespace GIBS.Modules.MealTrackerLite
 
 
                 }
-                //   lblDebug.Visible = true;
-                //   lblDebug.Text = "_DESE_Breakfast: " + _DESE_Breakfast;
+                 //  lblDebug.Visible = true;
+                 //  lblDebug.Text = "_DESE_Breakfast: " + _DESE_Breakfast;
             }
             catch (Exception ex)
             {
@@ -527,29 +582,30 @@ namespace GIBS.Modules.MealTrackerLite
         protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         {
 
-            int itemID = (int)GridView1.DataKeys[e.NewEditIndex].Value;
-           // Panel1.Visible = true;
+           // int itemID = (int)GridView1.DataKeys[e.NewEditIndex].Value;
+           //// Panel1.Visible = true;
 
 
-            MealController controller = new MealController();
-            MealInfo item = controller.GetMeal(itemID);
+           // MealController controller = new MealController();
+           // MealInfo item = controller.GetMeal(itemID);
 
-            if (item != null)
-            {
-                HiddenMealID.Value = item.MealID.ToString();
-                txtDelivered.Text = item.DeliveredCount.ToString();
-                txtMealNotes.Text = item.Notes.ToString();
-                ddlLocationID.SelectedValue = item.LocationID.ToString();
-                ddlSeating.SelectedValue = item.Seating.ToString();
-            //    LabelLocation.Text = item.Location.ToString();
-            //     LabelMeal.Text = item.Seating.ToString();
-                txtMealDate.Text = item.MealDate.ToShortDateString();
-                txtFirstsCount.Text = item.FirstsCount.ToString();
-                txtSecondsCount.Text = item.SecondsCount.ToString();
-                txtAdults.Text = item.Adults.ToString();
-                txtShort.Text = item.Short.ToString();
+           // if (item != null)
+           // {
+           //     HiddenMealID.Value = item.MealID.ToString();
+           //     txtDelivered.Text = item.DeliveredCount.ToString();
+           //     txtMealNotes.Text = item.Notes.ToString();
+           //     ddlLocationID.SelectedValue = item.LocationID.ToString();
+           //     ddlSeating.SelectedValue = item.Seating.ToString();
+           // //    LabelLocation.Text = item.Location.ToString();
+           // //     LabelMeal.Text = item.Seating.ToString();
+           //     txtMealDate.Text = item.MealDate.ToShortDateString();
+           //     txtMealDate.Enabled = false;
+           //     txtFirstsCount.Text = item.FirstsCount.ToString();
+           //     txtSecondsCount.Text = item.SecondsCount.ToString();
+           //     txtAdults.Text = item.Adults.ToString();
+           //     txtShort.Text = item.Short.ToString();
                 
-            }
+           // }
 
         }
 
@@ -576,6 +632,9 @@ namespace GIBS.Modules.MealTrackerLite
                         ddlLocationID.SelectedValue = item.LocationID.ToString();
                         ddlSeating.SelectedValue = item.Seating.ToString();
                         txtMealDate.Text = item.MealDate.ToShortDateString();
+                        txtMealDate.Enabled = false;
+                        ddlLocationID.Enabled = false;
+                        ddlSeating.Enabled = false;
                         txtFirstsCount.Text = item.FirstsCount.ToString();
                         txtSecondsCount.Text = item.SecondsCount.ToString();
                         txtAdults.Text = item.Adults.ToString();
@@ -598,6 +657,11 @@ namespace GIBS.Modules.MealTrackerLite
                                 ddlDeliveryTime.SelectedValue = item.DeliveryTime;
                             }
                         }
+                        if(item.MealDate.ToShortDateString() != item.DeliveryDateTime.ToShortDateString())
+                        {
+                            cbxDeliveryPriorDay.Checked = true;
+                        }
+
 
                     }
                 }

@@ -161,7 +161,7 @@
           <DevelopmentServerPort>65009</DevelopmentServerPort>
           <DevelopmentServerVPath>
           </DevelopmentServerVPath>
-          <IISUrl>http://dnndev.me/desktopmodules/MealTrackerLite</IISUrl>
+          <IISUrl>http://dnn9.com/desktopmodules/MealTrackerLite</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
           <IISAppRootUrl>http://dnndev.me</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
