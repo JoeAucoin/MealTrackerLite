@@ -54,6 +54,7 @@ namespace GIBS.Modules.MealTrackerLite
 
         static string _startDate = "06/24/2024";
         static string _endDate = "09/01/2024";
+        static int _mealFloat = 0;
 
         string _deleteRole = "";
 
@@ -118,6 +119,12 @@ namespace GIBS.Modules.MealTrackerLite
             return _endDate.ToString();
         }
 
+        protected int GetMealFloat()
+        {
+            return _mealFloat;
+
+        }
+
         public void LoadSettings()
         {
             try
@@ -179,6 +186,11 @@ namespace GIBS.Modules.MealTrackerLite
                 {
                     _endDate = Settings["calEndDate"].ToString();
 
+                }
+
+                if (Settings.Contains("mealFloat"))
+                {
+                    _mealFloat = Int32.Parse(Settings["mealFloat"].ToString());
                 }
 
             }

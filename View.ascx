@@ -25,31 +25,34 @@
     }
 
     function validateFirsts(source, args) {
+        var mealFloat = <%= GetMealFloat() %>
         var delivered = parseInt(document.getElementById('<%= txtDelivered.ClientID %>').value);
         var damaged = parseInt(document.getElementById('<%= txtDamagedIncomplete.ClientID %>').value);
         var firsts = parseInt(document.getElementById('<%= txtFirstsCount.ClientID %>').value);
 
         if (!isNaN(delivered) && !isNaN(damaged) && !isNaN(firsts)) {
-            args.IsValid = (firsts <= (delivered - damaged));
+            args.IsValid = (firsts <= (delivered - damaged + mealFloat));
         } else {
             args.IsValid = true; // Don't invalidate if any field is not a number (let RequiredFieldValidator handle empty)
         }
     }
 
     function validateSeconds(source, args) {
+        var mealFloat = <%= GetMealFloat() %>
         var delivered = parseInt(document.getElementById('<%= txtDelivered.ClientID %>').value);
         var damaged = parseInt(document.getElementById('<%= txtDamagedIncomplete.ClientID %>').value);
         var firsts = parseInt(document.getElementById('<%= txtFirstsCount.ClientID %>').value);
         var seconds = parseInt(document.getElementById('<%= txtSecondsCount.ClientID %>').value);
 
         if (!isNaN(delivered) && !isNaN(damaged) && !isNaN(firsts) && !isNaN(seconds)) {
-            args.IsValid = (seconds <= (delivered - damaged - firsts));
+            args.IsValid = (seconds <= ((delivered - damaged - firsts) + mealFloat));
         } else {
             args.IsValid = true; // Don't invalidate if any field is not a number (let RequiredFieldValidator handle empty)
         }
     }
 
     function validateAdults(source, args) {
+        var mealFloat = <%= GetMealFloat() %>
         var delivered = parseInt(document.getElementById('<%= txtDelivered.ClientID %>').value);
         var damaged = parseInt(document.getElementById('<%= txtDamagedIncomplete.ClientID %>').value);
         var firsts = parseInt(document.getElementById('<%= txtFirstsCount.ClientID %>').value);
@@ -57,7 +60,7 @@
         var adults = parseInt(document.getElementById('<%= txtAdults.ClientID %>').value);
 
         if (!isNaN(delivered) && !isNaN(damaged) && !isNaN(firsts) && !isNaN(seconds) && !isNaN(adults)) {
-            args.IsValid = (adults <= (delivered - damaged - firsts - seconds));
+            args.IsValid = (adults <= ((delivered - damaged - firsts - seconds) + mealFloat));
         } else {
             args.IsValid = true; // Don't invalidate if any field is not a number (let RequiredFieldValidator handle empty)
         }

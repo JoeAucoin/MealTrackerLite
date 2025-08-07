@@ -63,6 +63,13 @@
            
      </div>	
 
+
+    <div class="dnnFormItem">
+        <dnn:Label runat="server" ID="lblMealFloat" ControlName="txtMealFloat" ResourceKey="lblMealFloat" Suffix=":" />
+        <asp:Textbox ID="txtMealFloat" runat="server" Text="0" />
+           
+     </div>	
+
     </fieldset>
 
 

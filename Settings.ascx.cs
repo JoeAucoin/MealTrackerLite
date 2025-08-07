@@ -102,6 +102,9 @@ namespace GIBS.Modules.MealTrackerLite
                 if (Settings.Contains("calEndDate"))
                     txtCalEndDate.Text = Settings["calEndDate"].ToString();
 
+                if (Settings.Contains("mealFloat"))
+                    txtMealFloat.Text = Settings["mealFloat"].ToString();
+
             }
             catch (Exception exc) //Module failed to load
             {
@@ -184,6 +187,7 @@ namespace GIBS.Modules.MealTrackerLite
 
                 modules.UpdateModuleSetting(ModuleId, "calStartDate", txtCalStartDate.Text);
                 modules.UpdateModuleSetting(ModuleId, "calEndDate", txtCalEndDate.Text);
+                modules.UpdateModuleSetting(ModuleId, "mealFloat", txtMealFloat.Text);
 
 
             }
